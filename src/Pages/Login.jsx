@@ -91,7 +91,7 @@ const Login = () => {
                             <label className="block">Username</label>
                             <input
                                 type="text"
-                                placeholder="Dr. Jay Jay"
+                                placeholder="Enter email address"
                                 className="outline-none w-full mt-[10px]"
                                 onChange={(e) => setEmail(e.target.value)}
                             />
@@ -146,7 +146,6 @@ const Login = () => {
                         />
                         <p>Keep me logged in</p>
                     </div>
-                    <Link to="/reset-password">Reset Password</Link>
                 </div>
 
                 <button

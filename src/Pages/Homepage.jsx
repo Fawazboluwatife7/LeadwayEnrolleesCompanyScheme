@@ -5,6 +5,7 @@ import { MdAdd } from "react-icons/md";
 import { FaSpinner } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { CgLogOut } from "react-icons/cg";
+import { BsSearch } from "react-icons/bs";
 
 const Homepage = () => {
     const apiUrl = import.meta.env.VITE_API_BASE_URL;
@@ -21,6 +22,7 @@ const Homepage = () => {
     const [enrolleeData, setEnrolleeData] = useState({
         uniqueMembershipNo: "",
     });
+
     const [bioData, setBiodata] = useState([]);
     const [errorModal, setErrorModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -238,83 +240,83 @@ const Homepage = () => {
         GetRelationship();
     }, []);
 
-    const AddBeneficiary = async () => {
-        const postData = {
-            AddBeneficiary: [
-                {
-                    groupid: formData.company,
-                    MemberShipNo: enrolleeData,
-                    Parent_Cif: bioData,
-                    Cif_number: "",
-                    OfflineID: formData.staffNo,
-                    FirstName: dependantData.firstName,
-                    Surname: dependantData.surname,
-                    DateOfBirth: dependantData.dob,
-                    Sex_ID: dependantData.gender,
-                    MaritalStatus: "",
-                    EmailAdress: formData.email,
-                    Home_Phone: formData.phone,
-                    Work_Phone: formData.phone,
-                    Mobile: formData.phone,
-                    Mobile2: formData.phone,
-                    Hospital: "",
-                    Scheme: formData.scheme,
-                    Postal_Phone: formData.phone,
-                    Physical_Add1: formData.address,
-                    Postal_Town_ID: "",
-                    Relationship_ID: dependantData.relationship,
-                    BloodGroup: "",
-                    PreExistingCondition: "",
-                    EnrolleePictureType: "jpeg",
-                    EnrolleePicture: "data:image/jpeg;base64,...",
-                    genotype: "",
-                    othernames: "",
-                    regionid: "",
-                    schemeid: formData.schemeId,
-                    startdate: formData.startdate,
-                    registrationsource: "Web",
-                    usercaptured: "firstbillspay@firstbankgroup.com",
-                },
-            ],
-        };
+    // const AddBeneficiary = async () => {
+    //     const postData = {
+    //         AddBeneficiary: [
+    //             {
+    //                 groupid: formData.company,
+    //                 MemberShipNo: enrolleeData,
+    //                 Parent_Cif: bioData,
+    //                 Cif_number: "",
+    //                 OfflineID: formData.staffNo,
+    //                 FirstName: dependantData.firstName,
+    //                 Surname: dependantData.surname,
+    //                 DateOfBirth: dependantData.dob,
+    //                 Sex_ID: dependantData.gender,
+    //                 MaritalStatus: "",
+    //                 EmailAdress: formData.email,
+    //                 Home_Phone: formData.phone,
+    //                 Work_Phone: formData.phone,
+    //                 Mobile: formData.phone,
+    //                 Mobile2: formData.phone,
+    //                 Hospital: "",
+    //                 Scheme: formData.scheme,
+    //                 Postal_Phone: formData.phone,
+    //                 Physical_Add1: formData.address,
+    //                 Postal_Town_ID: "",
+    //                 Relationship_ID: dependantData.relationship,
+    //                 BloodGroup: "",
+    //                 PreExistingCondition: "",
+    //                 EnrolleePictureType: "jpeg",
+    //                 EnrolleePicture: "data:image/jpeg;base64,...",
+    //                 genotype: "",
+    //                 othernames: "",
+    //                 regionid: "",
+    //                 schemeid: formData.schemeId,
+    //                 startdate: formData.startdate,
+    //                 registrationsource: "Web",
+    //                 usercaptured: "firstbillspay@firstbankgroup.com",
+    //             },
+    //         ],
+    //     };
 
-        console.log(
-            "Sending beneficiary to API:",
-            JSON.stringify(postData, null, 2),
-        );
+    //     console.log(
+    //         "Sending beneficiary to API:",
+    //         JSON.stringify(postData, null, 2),
+    //     );
 
-        try {
-            const response = await fetch(
-                `${apiUrl}/api/EnrolleeProfile/AddBeneficiaryList`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(postData),
-                },
-            );
+    //     try {
+    //         const response = await fetch(
+    //             `${apiUrl}/api/EnrolleeProfile/AddBeneficiaryList`,
+    //             {
+    //                 method: "POST",
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                 },
+    //                 body: JSON.stringify(postData),
+    //             },
+    //         );
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error! Status: ${response.status}`);
+    //         }
 
-            const data = await response.json();
+    //         const data = await response.json();
 
-            if (data.status === 200 && data.VisitID) {
-                alert(`Visit ID ${data.VisitID} generated successfully!`);
-                setVisitId(data.VisitID);
-            } else {
-                alert(`Unexpected response: ${JSON.stringify(data)}`);
-            }
+    //         if (data.status === 200 && data.VisitID) {
+    //             alert(`Visit ID ${data.VisitID} generated successfully!`);
+    //             setVisitId(data.VisitID);
+    //         } else {
+    //             alert(`Unexpected response: ${JSON.stringify(data)}`);
+    //         }
 
-            SetData(data);
-            console.log("Success:", data);
-        } catch (error) {
-            console.error("Error submitting data:", error);
-        } finally {
-        }
-    };
+    //         SetData(data);
+    //         console.log("Success:", data);
+    //     } catch (error) {
+    //         console.error("Error submitting data:", error);
+    //     } finally {
+    //     }
+    // };
 
     useEffect(() => {
         if (enrolleeData != null) {
@@ -340,6 +342,25 @@ const Homepage = () => {
             console.error("get title:", error);
         }
     }
+
+    // const handleAddDependant = () => {
+    //     if (
+    //         !dependantData.image?.name ||
+    //         !dependantData.surname ||
+    //         !dependantData.firstName ||
+    //         !dependantData.dob ||
+    //         !dependantData.gender ||
+    //         !dependantData.relationship
+    //     ) {
+    //         setErrorMessage("Please fill out all fields before saving.");
+    //         return;
+    //     }
+
+    //     // If all fields are filled, clear error and continue
+    //     setErrorMessage("");
+    //     setDependants((prev) => [...prev, dependantData]);
+    //     setDependantData({});
+    // };
 
     const handleAddDependant = () => {
         setDependants((prev) => [...prev, dependantData]); // dependantData is your form state
@@ -386,7 +407,7 @@ const Homepage = () => {
                         schemeid: formData.schemeId,
                         startdate: formData.startdate,
                         registrationsource: "Web",
-                        usercaptured: "firstbillspay@firstbankgroup.com",
+                        usercaptured: user?.result[0]?.UserName,
                     },
                 ],
             };
@@ -561,6 +582,12 @@ const Homepage = () => {
         }
     };
 
+    const handleDeleteDependant = (indexToRemove) => {
+        setDependants((prev) =>
+            prev.filter((_, index) => index !== indexToRemove),
+        );
+    };
+
     const handleDependantFileChange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -605,6 +632,28 @@ const Homepage = () => {
         // The enrolleeData and bioData updates will trigger the useEffect to handle dependants
     };
 
+    const [companySearch, setCompanySearch] = useState("");
+    const [filteredCompanies, setFilteredCompanies] = useState([]);
+
+    const handleCompanySearchChange = (value) => {
+        setCompanySearch(value);
+        if (value.trim() === "") {
+            setFilteredCompanies([]);
+            return;
+        }
+        const results = company.filter((c) =>
+            c.GROUP_NAME.toLowerCase().includes(value.toLowerCase()),
+        );
+        setFilteredCompanies(results);
+    };
+
+    const handleCompanySelect = (selectedCompany) => {
+        setFormData({ ...formData, company: selectedCompany.GROUP_ID });
+        setSelectedGroupId(selectedCompany.GROUP_ID);
+        setCompanySearch(selectedCompany.GROUP_NAME);
+        setFilteredCompanies([]);
+    };
+
     return (
         <div className="w-full p-7  bg-gray-200 rounded-lg shadow-md">
             <div className=" flex justify-between">
@@ -625,10 +674,7 @@ const Homepage = () => {
 
             <div className="grid grid-cols-1 w-full md:grid-cols-2 gap-4  sm:mx-[8rem] md:mx-[0.1rem] lg:mx-[0.1rem]">
                 <div>
-                    <label className="block text-sm font-medium mb-1">
-                        Company
-                    </label>
-                    <select
+                    {/* <select
                         name="company"
                         className="w-full border rounded p-2"
                         value={formData.company}
@@ -659,7 +705,36 @@ const Homepage = () => {
                                 </option>
                             ))
                         )}
-                    </select>
+                    </select> */}
+
+                    <label className="font-semibold ">Company</label>
+                    <div className="relative w-full border flex items-center rounded">
+                        <BsSearch className="h-5 w-5 absolute left-2" />
+                        <input
+                            type="text"
+                            placeholder="Search company"
+                            className="w-full h-10 pl-10 outline-none rounded"
+                            value={companySearch}
+                            onChange={(e) =>
+                                handleCompanySearchChange(e.target.value)
+                            }
+                            required
+                        />
+                    </div>
+
+                    {filteredCompanies.length > 0 && (
+                        <ul className="border border-gray-300 mt-1 bg-white shadow-lg rounded-md absolute z-10  w-3/4 sm:w-1/2 md:w-1/2 lg:w-[47.5%] max-h-60 overflow-y-auto">
+                            {filteredCompanies.slice(0, 5).map((c) => (
+                                <li
+                                    key={c.GROUP_ID}
+                                    className="p-2 hover:bg-gray-200 cursor-pointer"
+                                    onClick={() => handleCompanySelect(c)}
+                                >
+                                    {c.GROUP_NAME}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
                 <div>
                     <label className="block text-sm font-medium mb-1">
@@ -763,6 +838,7 @@ const Homepage = () => {
                             placeholder="Enter MiddleName"
                             value={formData.middleName}
                             onChange={handleInputChange}
+                            required
                         />
                     </div>
 
@@ -805,6 +881,7 @@ const Homepage = () => {
                             className="w-full border rounded p-2"
                             value={formData.maritalStatus}
                             onChange={handleInputChange}
+                            required
                         >
                             <option value="">Select </option>
                             {marital.map((items) => (
@@ -921,6 +998,7 @@ const Homepage = () => {
                                 accept="image/*"
                                 onChange={handleFileChange}
                                 className="w-full"
+                                required
                             />
                             <p className="text-sm text-gray-500 mt-1">
                                 {formData.passport
@@ -952,9 +1030,10 @@ const Homepage = () => {
                                         <th className="border p-2 text-left">
                                             Date of Birth
                                         </th>
+                                        <th className="border p-2 text-left"></th>
                                     </tr>
                                 </thead>
-                                <tbody className=" border-b-black">
+                                <tbody className="border-b-black">
                                     {dependants.map((dependant, index) => (
                                         <tr
                                             key={index}
@@ -968,11 +1047,22 @@ const Homepage = () => {
                                                 {dependant.surname}
                                             </td>
                                             <td className="p-2">
-                                                {dependant.firstName}{" "}
-                                                {/* Changed from othername to firstName */}
+                                                {dependant.firstName}
                                             </td>
                                             <td className="p-2">
                                                 {dependant.dob}
+                                            </td>
+                                            <td className="p-2">
+                                                <button
+                                                    onClick={() =>
+                                                        handleDeleteDependant(
+                                                            index,
+                                                        )
+                                                    }
+                                                    className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                                                >
+                                                    Delete
+                                                </button>
                                             </td>
                                         </tr>
                                     ))}
@@ -1037,6 +1127,9 @@ const Homepage = () => {
                                 ×
                             </button>
                         </div>
+                        <h3 className=" text-red-700">
+                            All fields are compulsory
+                        </h3>
 
                         <div className="space-y-4">
                             <div>
@@ -1049,6 +1142,7 @@ const Homepage = () => {
                                         accept="image/*"
                                         onChange={handleDependantFileChange}
                                         className="w-full"
+                                        required
                                     />
                                     <p className="text-sm text-gray-500 mt-1">
                                         {dependantData.image?.name}
@@ -1080,6 +1174,7 @@ const Homepage = () => {
                                         className="w-full border rounded p-2"
                                         value={dependantData.firstName}
                                         onChange={handleDependantChange}
+                                        required
                                     />
                                 </div>
                             </div>
@@ -1094,6 +1189,7 @@ const Homepage = () => {
                                     className="w-full border rounded p-2"
                                     value={dependantData.dob}
                                     onChange={handleDependantChange}
+                                    required
                                 />
                             </div>
 
