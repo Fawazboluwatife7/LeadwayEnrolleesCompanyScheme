@@ -527,7 +527,7 @@ const Homepage = () => {
 
             setCompany(data.result);
         } catch (error) {
-            console.error("get Marital:", error);
+            console.error("get company:", error);
         }
     }
 
@@ -669,43 +669,26 @@ const Homepage = () => {
             </div>
 
             <h1 className="font-bold text-center mb-6 text-red-700 sm:text-[10px] md:text-[15px] lg:text-[30px] text-[16px]">
-                Please fill the form below. All fields are mandatory
+                Please fill the form below to access the list of providers you
+                can access under your plan
             </h1>
 
             <div className="grid grid-cols-1 w-full md:grid-cols-2 gap-4  sm:mx-[8rem] md:mx-[0.1rem] lg:mx-[0.1rem]">
                 <div>
-                    {/* <select
-                        name="company"
-                        className="w-full border rounded p-2"
-                        value={formData.company}
-                        onChange={(e) => {
-                            const selectedId = parseInt(e.target.value); // Convert string to number
-                            const selectedItem = company.find(
-                                (c) => c.GROUP_ID === selectedId,
-                            );
-
-                            setFormData({ ...formData, company: selectedId });
-
-                            if (selectedItem) {
-                                setSelectedGroupId(selectedId);
-                            }
-                        }}
-                        required
-                    >
-                        <option value="">Select</option>
-                        {company.length === 0 ? (
-                            <option value="">Loading companies...</option>
-                        ) : (
-                            company.map((items) => (
-                                <option
-                                    key={items.GROUP_ID}
-                                    value={items.GROUP_ID}
-                                >
-                                    {items.GROUP_NAME}
-                                </option>
-                            ))
-                        )}
-                    </select> */}
+                    <div>
+                        <label className="block text-sm font-medium mb-1">
+                            Enrollee Id
+                        </label>
+                        <input
+                            type="text"
+                            name="surname"
+                            className="w-full border rounded p-2"
+                            placeholder="Enter Surname"
+                            value={formData.surname}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    </div>
 
                     <label className="font-semibold ">Company</label>
                     <div className="relative w-full border flex items-center rounded">
